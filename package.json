@@ -1,0 +1,29 @@
+{
+  "name": "tech-blog",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prepare": "husky install"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/GDSC-UVic/tech-blog.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/GDSC-UVic/tech-blog/issues"
+  },
+  "homepage": "https://github.com/GDSC-UVic/tech-blog#readme",
+  "devDependencies": {
+    "husky": "^8.0.3",
+    "lint-staged": "^15.1.0",
+    "prettier": "3.1.0"
+  },
+  "lint-staged": {
+    "packages/**/*.{js,jsx,ts,tsx,json,css,scss,md}": "prettier --write"
+  }
+}

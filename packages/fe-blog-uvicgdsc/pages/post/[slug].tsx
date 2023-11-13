@@ -2,8 +2,7 @@
 
 import client from '../../client'
 
-const Post = ({post}) => {
-  
+const Post = ({ post }: any) => {
   return (
     <article>
       <h1>{post?.slug?.current}</h1>
@@ -17,22 +16,25 @@ export async function getStaticPaths() {
   )
 
   return {
-    paths: paths.map((slug) => ({params: {slug}})),
+    paths: paths.map((slug: any) => ({ params: { slug } })),
     fallback: true,
   }
 }
 
-export async function getStaticProps(context) {
+export async function getStaticProps(context: any) {
   // It's important to default the slug so that it doesn't return "undefined"
-  const { slug = "" } = context.params
-  const post = await client.fetch(`
+  const { slug = '' } = context.params
+  const post = await client.fetch(
+    `
     *[_type == "post" && slug.current == $slug][0]
-  `, { slug })
-  
+  `,
+    { slug }
+  )
+
   return {
     props: {
-      post
-    }
+      post,
+    },
   }
 }
 
