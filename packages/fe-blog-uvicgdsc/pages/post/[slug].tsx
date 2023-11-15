@@ -1,11 +1,27 @@
 // ./frontend/pages/post/[slug].tsx
 
 import client from '../../client'
+import { toHTML } from '@portabletext/to-html'
 
-const Post = ({ post }: any) => {
+const Post = ({
+  post,
+}: {
+  post: {
+    slug: {
+      current: string
+    }
+    body: any[]
+  }
+}) => {
+  console.log('post', post)
   return (
     <article>
       <h1>{post?.slug?.current}</h1>
+      <article
+        dangerouslySetInnerHTML={{
+          __html: toHTML(post?.body),
+        }}
+      />
     </article>
   )
 }
