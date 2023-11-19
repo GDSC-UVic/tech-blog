@@ -1,0 +1,24 @@
+.bannerPage {
+  background-color: #f1f3f4;
+  /* height: 75px; */
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  display: flex;
+}
+
+.logo {
+  flex-direction: column;
+  width: 30%;
+  padding-left: 2%;
+}
+
+.title {
+  flex-direction: column;
+  width: 70%;
+  /* background-color: white; */
+  font-size: 40px;
+  font-weight: bold;
+  /* text-align: center; */
+  color: #5f6368;
+}
