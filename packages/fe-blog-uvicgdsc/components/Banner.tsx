@@ -21,10 +21,6 @@ const Banner = () => {
             height="50px"
           />
         </div>
-        <div className={styles.title}>
-          University of Victoria GDSC Tech Blog
-        </div>
-        {/* </div> */}
       </div>
     </div>
   )
