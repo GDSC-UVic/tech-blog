@@ -1,7 +1,9 @@
 // ./frontend/pages/post/[slug].tsx
 
 import client from '../../client'
-import { toHTML } from '@portabletext/to-html'
+import { PortableText } from '@portabletext/react'
+import imageUrlBuilder from '@sanity/image-url'
+const builder = imageUrlBuilder(client)
 
 const Post = ({
   post,
@@ -13,16 +15,50 @@ const Post = ({
     body: any[]
   }
 }) => {
-  console.log('post', post)
+  function urlFor(source: any) {
+    return builder.image(source)
+  }
+  const myPortableTextComponents = {
+    types: {
+      image: ({
+        value,
+      }: {
+        value: {
+          asset: {
+            _type: string
+            _ref: string
+          }
+          _type: string
+          _key: string
+        }
+      }) => {
+        let width
+        console.log(value)
+        if (value._key === '5663b8941afa') {
+          width = 600
+        }
+        return (
+          <img
+            className="tw-mx-auto"
+            src={String(urlFor(value.asset._ref).url())}
+            width={width}
+          />
+        )
+      },
+    },
+  }
   return (
-    <article>
-      <h1>{post?.slug?.current}</h1>
+    <div>
       <article
-        dangerouslySetInnerHTML={{
-          __html: toHTML(post?.body),
-        }}
-      />
-    </article>
+        className="tw-prose tw-max-w-[100vw] tw-text-grey tw-p-[40px] "
+        // dangerouslySetInnerHTML={{ __html: toHTML(post?.body) }}
+      >
+        <PortableText
+          value={post?.body}
+          components={myPortableTextComponents}
+        />
+      </article>
+    </div>
   )
 }
 
