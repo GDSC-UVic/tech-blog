@@ -1,3 +1,5 @@
+import Head from 'next/head'
+
 // index.tsx
 const Index = () => {
   return (
