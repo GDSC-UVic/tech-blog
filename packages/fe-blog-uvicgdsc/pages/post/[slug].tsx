@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 // ./frontend/pages/post/[slug].tsx
 
 import client from '../../client'
@@ -9,6 +10,40 @@ import { Avatar, Container } from '@mui/material'
 import { grey } from '@mui/material/colors'
 import Box from '@mui/material/Box'
 import Grid from '@mui/material/Grid'
+
+const portableTextComponentsWithPictures = {
+  types: {
+    image: ({
+      value,
+    }: {
+      value: {
+        asset: {
+          _type: string
+          _ref: string
+        }
+        _type: string
+        _key: string
+      }
+    }) => {
+      let width
+      // switcher for custom values
+      if (value._key === '5663b8941afa') {
+        width = 600
+      }
+      function urlFor(source: any) {
+        return builder.image(source)
+      }
+      return (
+        <img
+          className="tw-mx-auto"
+          src={String(urlFor(value.asset._ref).url())}
+          width={width}
+          alt={value.asset._ref}
+        />
+      )
+    },
+  },
+}
 
 const Post = ({
   post,
@@ -23,37 +58,6 @@ const Post = ({
     body: any[]
   }
 }) => {
-  function urlFor(source: any) {
-    return builder.image(source)
-  }
-  const myPortableTextComponents = {
-    types: {
-      image: ({
-        value,
-      }: {
-        value: {
-          asset: {
-            _type: string
-            _ref: string
-          }
-          _type: string
-          _key: string
-        }
-      }) => {
-        let width
-        if (value._key === '5663b8941afa') {
-          width = 600
-        }
-        return (
-          <img
-            className="tw-mx-auto"
-            src={String(urlFor(value.asset._ref).url())}
-            width={width}
-          />
-        )
-      },
-    },
-  }
   function formatDateString(inputDateString: string): string {
     const inputDate = new Date(inputDateString)
 
@@ -92,7 +96,7 @@ const Post = ({
 
         <PortableText
           value={post?.body}
-          components={myPortableTextComponents}
+          components={portableTextComponentsWithPictures}
         />
       </article>
     </div>
