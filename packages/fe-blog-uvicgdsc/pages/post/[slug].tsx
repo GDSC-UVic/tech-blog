@@ -64,7 +64,7 @@ const Post = ({
     return `${month}/${day}/${year}`
   }
   return (
-    <div>
+    <div className="tw-mx-auto">
       <article
         className="tw-prose tw-max-w-[100vw] tw-text-grey tw-px-[400px] tw-py-[30px]"
         // dangerouslySetInnerHTML={{ __html: toHTML(post?.body) }}
